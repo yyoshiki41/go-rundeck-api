@@ -18,6 +18,10 @@ import (
 	"strings"
 )
 
+const (
+	apiVersion = 20
+)
+
 // ClientConfig is used with NewClient to specify initialization settings.
 type ClientConfig struct {
 	// The base URL of the Rundeck instance.
@@ -57,7 +61,7 @@ func NewClient(config *ClientConfig) (*Client, error) {
 		Transport: t,
 	}
 
-	apiPath, _ := url.Parse("api/13/")
+	apiPath, _ := url.Parse(fmt.Sprintf("api/%d/", apiVersion))
 	baseURL, err := url.Parse(config.BaseURL)
 	if err != nil {
 		return nil, fmt.Errorf("invalid base URL: %s", err.Error())
